@@ -16,6 +16,7 @@ namespace CharacterControl
         public override void HandleOnEnter()
         {
             bubbleObject.Value.SetActive(true);
+            controller.animator.Play("BubbleSkate");
         }
 
         public override void HandleOnExit()

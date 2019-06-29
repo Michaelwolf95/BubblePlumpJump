@@ -56,6 +56,12 @@ namespace CharacterControl
             
         }
 
+        public override void HandleOnMoveUpdate()
+        {
+
+        }
+
+
         public override Vector3 CalcDesiredVelocity()
         {
             controller.speed = walk ? walkSpeed : runSpeed;
@@ -69,31 +75,6 @@ namespace CharacterControl
             // else, convert input (moveDirection) to velocity vector
 
             return controller.moveDirection * controller.speed;
-        }
-
-        public override void Animate()
-        {
-            // If no animator, return
-            if (controller.animator == null)
-                return;
-
-            // Compute move vector in local space
-
-            var move = controller.transform.InverseTransformDirection(controller.moveDirection);
-
-            // Update the animator parameters
-
-            var forwardAmount = controller.animator.applyRootMotion
-                ? move.z
-                : Mathf.InverseLerp(0.0f, runSpeed, controller.movement.forwardSpeed);
-
-            controller.animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
-            controller.animator.SetFloat("Turn", Mathf.Atan2(move.x, move.z), 0.1f, Time.deltaTime);
-
-            controller.animator.SetBool("OnGround", controller.movement.isGrounded);
-
-            if (!controller.movement.isGrounded)
-                controller.animator.SetFloat("Jump", controller.movement.velocity.y, 0.1f, Time.deltaTime);
         }
 
 
@@ -121,9 +102,30 @@ namespace CharacterControl
             }
         }
 
-        public override void HandleOnMoveUpdate()
+        public override void Animate()
         {
-            
+            // If no animator, return
+            if (controller.animator == null)
+                return;
+
+            // Compute move vector in local space
+
+            var move = controller.transform.InverseTransformDirection(controller.moveDirection);
+
+            // Update the animator parameters
+
+            var forwardAmount = controller.animator.applyRootMotion
+                ? move.z
+                : Mathf.InverseLerp(0.0f, runSpeed, controller.movement.forwardSpeed);
+
+            controller.animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
+            controller.animator.SetFloat("Turn", Mathf.Atan2(move.x, move.z), 0.1f, Time.deltaTime);
+
+            controller.animator.SetBool("OnGround", controller.movement.isGrounded);
+
+            if (!controller.movement.isGrounded)
+                controller.animator.SetFloat("Jump", controller.movement.velocity.y, 0.1f, Time.deltaTime);
         }
+
     }
 }
