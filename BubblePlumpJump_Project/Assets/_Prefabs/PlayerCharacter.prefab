@@ -364,7 +364,7 @@ MonoBehaviour:
   _extraJumpTime: 0.5
   _extraJumpPower: 25
   _jumpToleranceTime: 0.15
-  _maxMidAirJumps: 1
+  _maxMidAirJumps: 0
   _useRootMotion: 0
   stateMachine: {fileID: 1108115794969300328}
   currentStateName: NONE
