@@ -563,7 +563,7 @@ namespace ECM.Controllers
         /// NOTE: Must be called in FixedUpdate.
         /// </summary>
 
-        protected void Move()
+        protected virtual void Move()
         {
             // Apply movement
 
