@@ -13,7 +13,8 @@ public abstract class ECMPlaymakerStateBase : FsmStateAction
     }
     public override void OnEnter()
     {
-        controller.currentCharacterState = this;
+        controller.SetState(this);
+        //controller.currentCharacterState = this;
         HandleOnEnter();
     }
 

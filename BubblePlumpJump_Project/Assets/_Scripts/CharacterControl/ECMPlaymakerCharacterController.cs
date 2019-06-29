@@ -8,6 +8,13 @@ public class ECMPlaymakerCharacterController : BaseCharacterController
 {
     public PlayMakerFSM stateMachine;
     public ECMPlaymakerStateBase currentCharacterState = null;
+    public string currentStateName = "NONE";
+
+    public void SetState(ECMPlaymakerStateBase state)
+    {
+        currentCharacterState = state;
+        currentStateName = state.State.Name;
+    }
 
     protected override void Move()
     {

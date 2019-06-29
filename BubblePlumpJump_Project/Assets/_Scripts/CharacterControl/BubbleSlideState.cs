@@ -22,6 +22,7 @@ namespace CharacterControl
         public override void HandleOnExit()
         {
             bubbleObject.Value.SetActive(false);
+            controller.animator.SetTrigger("EXIT");
         }
 
         public override void HandleOnMoveUpdate()
@@ -52,6 +53,9 @@ namespace CharacterControl
         public override Vector3 CalcDesiredVelocity()
         {
             controller.speed = this.moveSpeed;
+
+            if (controller.useRootMotion && controller.applyRootMotion)
+                return controller.rootMotionController.animVelocity;
 
             return controller.moveDirection * controller.speed;
         }

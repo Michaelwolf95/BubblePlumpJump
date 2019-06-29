@@ -367,6 +367,7 @@ MonoBehaviour:
   _maxMidAirJumps: 1
   _useRootMotion: 0
   stateMachine: {fileID: 1108115794969300328}
+  currentStateName: NONE
 --- !u!1 &1108115795432991966
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +379,6 @@ GameObject:
   - component: {fileID: 1108115795432991965}
   - component: {fileID: 1108115795432991962}
   - component: {fileID: 1108115795432991963}
-  - component: {fileID: 1108115795432991964}
   m_Layer: 0
   m_Name: SkateBubble
   m_TagString: Untagged
@@ -445,19 +445,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &1108115795432991964
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108115795432991966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1108115793963178844
 PrefabInstance:
   m_ObjectHideFlags: 0
