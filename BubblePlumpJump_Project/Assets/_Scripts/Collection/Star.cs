@@ -3,21 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public interface ICollectable
+public class Star : CollectableBase
 {
-    Action OnCollected { get; set; }
-}
-
-public class Star : MonoBehaviour, ICollectable
-{
-    private bool isCollected = false;
-
-    private Action _onCollected;
-    public Action OnCollected {
-        get { return _onCollected; }
-        set { _onCollected = value; }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (isCollected) return;
@@ -27,8 +14,16 @@ public class Star : MonoBehaviour, ICollectable
             {
                 Debug.Log("Collected Star.");
                 isCollected = true;
-                Destroy(this.gameObject);
                 StarCollectionManager.Instance.AddStar(1);
+                OnCollected();
+
+                foreach (Transform child in this.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+
+
+                Destroy(this.gameObject, 1f);
             }
         }
     }
