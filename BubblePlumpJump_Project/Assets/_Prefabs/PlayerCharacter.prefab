@@ -212,7 +212,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 50
-        y: 116
+        y: 180
         width: 113
         height: 48
       isBreakpoint: 0
@@ -289,10 +289,10 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 262
-        y: 110
+        x: 244
+        y: 110.953125
         width: 113
-        height: 32
+        height: 48
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
@@ -305,6 +305,14 @@ MonoBehaviour:
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
+      - fsmEvent:
+          name: AirJump
+          isSystemEvent: 0
+          isGlobal: 0
+        toState: AirJump
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
       actionData:
         actionNames:
         - CharacterControl.BubbleSlideState
@@ -313,7 +321,7 @@ MonoBehaviour:
         actionEnabled: 01
         actionIsOpen: 01
         actionStartIndex: 00000000
-        actionHashCodes: 3636bf05
+        actionHashCodes: 63bec904
         unityObjectParams:
         - {fileID: 0}
         fsmGameObjectParams:
@@ -343,26 +351,30 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
-        byteData: 00008041
+        stringParams:
+        - AirJump
+        byteData: 000080410000003f0000003f
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 020000001300000005000000
+        paramDataType: 020000001300000017000000020000000200000005000000
         paramName:
         - moveSpeed
         - bubbleObject
+        - AirJumpEvent
+        - _TurnSpeedMultiplier
+        - _DefaultBubbleSpeed
         - controller
-        paramDataPos: 000000000000000000000000
-        paramByteDataSize: 040000000000000000000000
+        paramDataPos: 000000000000000000000000040000000800000000000000
+        paramByteDataSize: 040000000000000000000000040000000400000000000000
     - name: AirJump
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
         x: 275
-        y: 189
+        y: 253
         width: 100
         height: 48
       isBreakpoint: 0
@@ -444,7 +456,7 @@ MonoBehaviour:
       position:
         serializedVersion: 2
         x: 267.58594
-        y: 259.60156
+        y: 323.60156
         width: 100
         height: 32
       isBreakpoint: 0

@@ -10,6 +10,8 @@ namespace CharacterControl
         public float moveSpeed = 8f;
         public FsmGameObject bubbleObject;
 
+        public FsmEvent AirJumpEvent;
+
         private bool _CancelBubble = false;
         private bool _Jump = false;
         private bool _JustEnteredState = false;
@@ -84,6 +86,11 @@ namespace CharacterControl
 
             if (!controller.movement.isGrounded)
                 controller.animator.SetFloat("Jump", controller.movement.velocity.y, 0.1f, Time.deltaTime);
+
+            if (Input.GetButtonDown("Jump") && !controller.isGrounded)
+            {
+                Fsm.Event(AirJumpEvent);
+            }
         }
 
 
