@@ -10,11 +10,13 @@ namespace CharacterControl
         public float moveSpeed = 8f;
         public FsmGameObject bubbleObject;
 
-        private bool cancelBubble = false;
-        private bool jump = false;
+        private bool _CancelBubble = false;
+        private bool _Jump = false;
+        private bool _JustEnteredState = false;
 
         public override void HandleOnEnter()
         {
+            _JustEnteredState = true;
             bubbleObject.Value.SetActive(true);
             controller.animator.Play("BubbleSkate");
         }
@@ -27,26 +29,29 @@ namespace CharacterControl
 
         public override void HandleOnMoveUpdate()
         {
-            if (cancelBubble)
+            if (_CancelBubble)
                 this.Finish();
         }
+
+        [Range(0, 1)]
+        public float _TurnSpeedMultiplier = 0.5f;
+        [Range(0,1)] 
+        public float _DefaultBubbleSpeed = 0.5f;
 
         public override void HandleInput()
         {
             controller.moveDirection = new Vector3
             {
-                x = Input.GetAxisRaw("Horizontal"),
+                x = Input.GetAxisRaw("Horizontal") * _TurnSpeedMultiplier,
                 y = 0.0f,
-                z = Input.GetAxisRaw("Vertical")
-            };
+                z = Input.GetAxisRaw("Vertical") + _DefaultBubbleSpeed
+            };               
 
-            cancelBubble = Input.GetButtonUp("Fire3");
+            _CancelBubble = Input.GetButtonUp("Fire3");
 
             controller.jump = Input.GetButton("Jump");
 
-
             // Transform moveDirection vector to be relative to camera view direction
-
             controller.moveDirection = controller.moveDirection.relativeTo(Camera.main.transform);
         }
 
