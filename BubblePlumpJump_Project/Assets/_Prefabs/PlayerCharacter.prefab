@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1108115794969300334}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,8 +289,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 244
-        y: 110.953125
+        x: 268
+        y: 105
         width: 113
         height: 48
       isBreakpoint: 0
@@ -914,26 +914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -22.345001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296228119381398582, guid: 16f5d5942c798c645840df4107264d84,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296228119381398579, guid: 16f5d5942c798c645840df4107264d84,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296228119238609490, guid: 16f5d5942c798c645840df4107264d84,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296228119238609503, guid: 16f5d5942c798c645840df4107264d84,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16f5d5942c798c645840df4107264d84, type: 3}
