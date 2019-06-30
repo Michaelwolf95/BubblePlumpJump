@@ -5,53 +5,62 @@ using HutongGames.PlayMaker;
 
 namespace CharacterControl
 {
-    public class BubbleSlideState : ECMPlaymakerStateBase
+    public class GlideState : ECMPlaymakerStateBase
     {
         public float moveSpeed = 8f;
+
+        public float gravity = 2.5f;
+
         public FsmGameObject bubbleObject;
 
-        private bool _CancelBubble = false;
-        private bool _Jump = false;
-        private bool _JustEnteredState = false;
+        private bool cancelBubble = false;
+        private bool jump = false;
+
+
+        private float originalGravity;
 
         public override void HandleOnEnter()
         {
-            _JustEnteredState = true;
             bubbleObject.Value.SetActive(true);
-            controller.animator.SetTrigger("StartBubbleSkate");
+            //controller.animator.SetTrigger("StartBubbleSkate");
+            controller.animator.SetBool("IsHovering", true);
+
+            //controller.allowVerticalMovement = true;
+
+            originalGravity = controller.movement.gravity;
+            controller.movement.gravity = gravity;
         }
 
         public override void HandleOnExit()
         {
             bubbleObject.Value.SetActive(false);
-            controller.animator.SetTrigger("EXIT");
+            //controller.animator.SetTrigger("EXIT_HOVER");
+            controller.animator.SetBool("IsHovering", false);
+
+            //controller.allowVerticalMovement = false;
+
+            controller.movement.gravity = originalGravity;
         }
 
         public override void HandleOnMoveUpdate()
         {
-            if (_CancelBubble)
+            if (cancelBubble || controller.isGrounded)
                 this.Finish();
         }
-
-        [Range(0, 1)]
-        public float _TurnSpeedMultiplier = 0.5f;
-        [Range(0,1)] 
-        public float _DefaultBubbleSpeed = 0.5f;
 
         public override void HandleInput()
         {
             controller.moveDirection = new Vector3
             {
-                x = Input.GetAxisRaw("Horizontal") * _TurnSpeedMultiplier,
+                x = Input.GetAxisRaw("Horizontal"),
                 y = 0.0f,
-                z = Input.GetAxisRaw("Vertical") + _DefaultBubbleSpeed
-            };               
+                z = Input.GetAxisRaw("Vertical")
+            };
 
-            _CancelBubble = Input.GetButtonUp("Fire3");
-
-            controller.jump = Input.GetButton("Jump");
+            cancelBubble = Input.GetButtonUp("Jump");
 
             // Transform moveDirection vector to be relative to camera view direction
+
             controller.moveDirection = controller.moveDirection.relativeTo(Camera.main.transform);
         }
 

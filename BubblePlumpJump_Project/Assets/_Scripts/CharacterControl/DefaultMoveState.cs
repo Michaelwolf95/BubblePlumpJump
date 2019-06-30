@@ -17,6 +17,7 @@ namespace CharacterControl
         public float _runSpeed = 5.0f;
 
         public FsmEvent StartSlideEvent;
+        public FsmEvent AirJumpEvent;
         #endregion
 
         #region PROPERTIES
@@ -100,6 +101,11 @@ namespace CharacterControl
             {
                 Fsm.Event(StartSlideEvent);
             }
+
+            if (Input.GetButtonDown("Jump") && !controller.isGrounded)
+            {
+                Fsm.Event(AirJumpEvent);
+            }
         }
 
         public override void Animate()
@@ -109,11 +115,9 @@ namespace CharacterControl
                 return;
 
             // Compute move vector in local space
-
             var move = controller.transform.InverseTransformDirection(controller.moveDirection);
 
             // Update the animator parameters
-
             var forwardAmount = controller.animator.applyRootMotion
                 ? move.z
                 : Mathf.InverseLerp(0.0f, runSpeed, controller.movement.forwardSpeed);

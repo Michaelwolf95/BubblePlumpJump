@@ -5,53 +5,83 @@ using HutongGames.PlayMaker;
 
 namespace CharacterControl
 {
-    public class BubbleSlideState : ECMPlaymakerStateBase
+    public class HoverJumpState : ECMPlaymakerStateBase
     {
-        public float moveSpeed = 8f;
+        public float moveSpeed = 2f;
+
         public FsmGameObject bubbleObject;
 
-        private bool _CancelBubble = false;
-        private bool _Jump = false;
-        private bool _JustEnteredState = false;
+        public FsmEvent cancelEvent;
+
+        private bool cancelBubble = false;
 
         public override void HandleOnEnter()
         {
-            _JustEnteredState = true;
             bubbleObject.Value.SetActive(true);
-            controller.animator.SetTrigger("StartBubbleSkate");
+            controller.animator.SetBool("IsHovering", true);
+            //controller.animator.SetTrigger("HoverJump");
+
+            controller.maxMidAirJumps = 1;
+            cancelBubble = false;
         }
 
         public override void HandleOnExit()
         {
+            controller.maxMidAirJumps = 0;
+            cancelBubble = false;
             bubbleObject.Value.SetActive(false);
-            controller.animator.SetTrigger("EXIT");
+            controller.animator.SetBool("IsHovering", false);
+            //controller.animator.SetTrigger("EXIT_HOVER");
+            if (Input.GetButton("Jump") == false)
+            {
+                
+            }
+            else
+            {
+                
+               // this.Finish();
+            }
+
+            //controller.allowVerticalMovement = false;
+
+            //controller.movement.gravity = originalGravity;
         }
 
         public override void HandleOnMoveUpdate()
         {
-            if (_CancelBubble)
-                this.Finish();
+            if (cancelBubble || controller.isGrounded)
+            {
+                Fsm.Event(cancelEvent);
+            }
+            else if (this.controller.movement.velocity.y <= 0)
+            {
+                if (Input.GetButton("Jump") == false)
+                {
+                 //   bubbleObject.Value.SetActive(false);
+                    //controller.animator.SetTrigger("EXIT_HOVER");
+                   // controller.animator.SetBool("IsHovering", false);
+                    Fsm.Event(cancelEvent);
+                }
+                else
+                {
+                    this.Finish();
+                }
+            }
         }
-
-        [Range(0, 1)]
-        public float _TurnSpeedMultiplier = 0.5f;
-        [Range(0,1)] 
-        public float _DefaultBubbleSpeed = 0.5f;
 
         public override void HandleInput()
         {
             controller.moveDirection = new Vector3
             {
-                x = Input.GetAxisRaw("Horizontal") * _TurnSpeedMultiplier,
+                x = Input.GetAxisRaw("Horizontal"),
                 y = 0.0f,
-                z = Input.GetAxisRaw("Vertical") + _DefaultBubbleSpeed
-            };               
+                z = Input.GetAxisRaw("Vertical")
+            };
 
-            _CancelBubble = Input.GetButtonUp("Fire3");
-
-            controller.jump = Input.GetButton("Jump");
+            cancelBubble = Input.GetButtonUp("Jump");
 
             // Transform moveDirection vector to be relative to camera view direction
+
             controller.moveDirection = controller.moveDirection.relativeTo(Camera.main.transform);
         }
 
