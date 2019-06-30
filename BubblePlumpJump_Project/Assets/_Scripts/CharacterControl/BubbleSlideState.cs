@@ -16,7 +16,7 @@ namespace CharacterControl
         public override void HandleOnEnter()
         {
             bubbleObject.Value.SetActive(true);
-            controller.animator.Play("BubbleSkate");
+            controller.animator.SetTrigger("StartBubbleSkate");
         }
 
         public override void HandleOnExit()
@@ -62,7 +62,23 @@ namespace CharacterControl
 
         public override void Animate()
         {
-            
+            // Compute move vector in local space
+
+            var move = controller.transform.InverseTransformDirection(controller.moveDirection);
+
+            // Update the animator parameters
+
+            var forwardAmount = controller.animator.applyRootMotion
+                ? move.z
+                : Mathf.InverseLerp(0.0f, moveSpeed, controller.movement.forwardSpeed);
+
+            controller.animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
+            controller.animator.SetFloat("Turn", Mathf.Atan2(move.x, move.z), 0.1f, Time.deltaTime);
+
+            controller.animator.SetBool("OnGround", controller.movement.isGrounded);
+
+            if (!controller.movement.isGrounded)
+                controller.animator.SetFloat("Jump", controller.movement.velocity.y, 0.1f, Time.deltaTime);
         }
 
 
