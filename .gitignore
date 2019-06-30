@@ -36,4 +36,4 @@ sysinfo.txt
 *.unitypackage
 
 # Probuilder
-*.local.settings.json
+*.ProBuilderSettings.json
