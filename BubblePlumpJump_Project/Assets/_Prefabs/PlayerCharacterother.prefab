@@ -1545,7 +1545,7 @@ GameObject:
   - component: {fileID: 3349739450734735280}
   - component: {fileID: 6562872328633408855}
   m_Layer: 0
-  m_Name: PlayerCharacter (1)
+  m_Name: PlayerCharacterother
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1686,7 +1686,7 @@ MonoBehaviour:
         actionEnabled: 01
         actionIsOpen: 01
         actionStartIndex: 00000000
-        actionHashCodes: f0353b05
+        actionHashCodes: ca6a9701
         unityObjectParams:
         - {fileID: 0}
         fsmGameObjectParams: []
@@ -1712,19 +1712,21 @@ MonoBehaviour:
         fsmQuaternionParams: []
         stringParams:
         - BubbleSkate
+        - 
         byteData: 000020400000a040
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 02000000020000001700000005000000
+        paramDataType: 0200000002000000170000001700000005000000
         paramName:
         - _walkSpeed
         - _runSpeed
         - StartSlideEvent
+        - AirJumpEvent
         - controller
-        paramDataPos: 00000000040000000000000000000000
-        paramByteDataSize: 04000000040000000000000000000000
+        paramDataPos: 0000000004000000000000000100000000000000
+        paramByteDataSize: 0400000004000000000000000000000000000000
     - name: BubbleSkate
       description: 
       colorIndex: 0
@@ -1754,7 +1756,7 @@ MonoBehaviour:
         actionEnabled: 01
         actionIsOpen: 01
         actionStartIndex: 00000000
-        actionHashCodes: f8265a02
+        actionHashCodes: 63bec904
         unityObjectParams:
         - {fileID: 0}
         fsmGameObjectParams:
@@ -1784,21 +1786,23 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams: []
+        stringParams:
+        - 
         byteData: 00008041cdcc4c3e0000003f
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 0200000013000000020000000200000005000000
+        paramDataType: 020000001300000017000000020000000200000005000000
         paramName:
         - moveSpeed
         - bubbleObject
+        - AirJumpEvent
         - _TurnSpeedMultiplier
         - _DefaultBubbleSpeed
         - controller
-        paramDataPos: 0000000000000000040000000800000000000000
-        paramByteDataSize: 0400000000000000040000000400000000000000
+        paramDataPos: 000000000000000000000000040000000800000000000000
+        paramByteDataSize: 040000000000000000000000040000000400000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
